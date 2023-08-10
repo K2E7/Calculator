@@ -51,8 +51,8 @@ To explore and contribute to the R37URN0 Calculator, follow these steps:
 
 ## License
 
-The R37URN0 Calculator is released under the [MIT License](link_to_license_file), permitting use in personal and commercial projects.
+The R37URN0 Calculator is released under the [MIT License](LICENSE), permitting use in personal and commercial projects.
 
 ---
 
-For inquiries, issues, or feedback, please contact us at team@r37urn0calculator.com. We hope the R37URN0 Calculator proves to be a valuable tool for your fundamental arithmetic calculations!
+For inquiries, issues, or feedback, please contact us at k2e7.tensor@gmail.com. We hope the R37URN0 Calculator proves to be a valuable tool for your fundamental arithmetic calculations!
