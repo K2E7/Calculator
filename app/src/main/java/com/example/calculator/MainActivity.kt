@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
             CalculatorTheme {
                 // A surface container using the 'background' color from the theme
                 val darkModeEnabled by LocalTheme.current.darkMode.collectAsState()
-                val textColor = MaterialTheme.colorScheme.primary
+                val textColor = MaterialTheme.colorScheme.tertiary
                 val themeViewModel = LocalTheme.current
                 val primary_color = if(darkModeEnabled) DarkMode_Primary else LightMode_Primary
                 val secondary_color = if(darkModeEnabled) DarkMode_Secondary else LightMode_Secondary
@@ -292,7 +292,7 @@ fun CalcButton(button: CalculatorButton, textColor: Color, onClick: () -> Unit) 
                 button.text,
                 color = contentColor,
                 fontWeight = FontWeight.Bold,
-                fontSize = if (button.type == CalculatorButtonType.Action) 25.sp else 20.sp
+                fontSize = if (button.type == CalculatorButtonType.Action) 25.sp else 25.sp
             )
         } else {
             Icon(
