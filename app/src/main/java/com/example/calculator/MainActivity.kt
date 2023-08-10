@@ -66,11 +66,12 @@ class MainActivity : ComponentActivity() {
                 val darkModeEnabled by LocalTheme.current.darkMode.collectAsState()
                 val textColor = MaterialTheme.colorScheme.tertiary
                 val themeViewModel = LocalTheme.current
-                val primary_color = if(darkModeEnabled) DarkMode_Primary else LightMode_Primary
-                val secondary_color = if(darkModeEnabled) DarkMode_Secondary else LightMode_Secondary
+                val primaryColor = if (darkModeEnabled) DarkMode_Primary else LightMode_Primary
+                val secondaryColor =
+                    if (darkModeEnabled) DarkMode_Secondary else LightMode_Secondary
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = primary_color
+                    color = primaryColor
                 ) {
 
                     val calculatorButtons = remember {
@@ -139,7 +140,7 @@ class MainActivity : ComponentActivity() {
                             LazyVerticalGrid(
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp))
-                                    .background(secondary_color)
+                                    .background(secondaryColor)
                                     .padding(8.dp),
                                 columns = GridCells.Fixed(4),
                                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -157,7 +158,7 @@ class MainActivity : ComponentActivity() {
                                                         setUiText(
                                                             uiText.toInt().toString() + it.text
                                                         )
-                                                    }.onFailure { throwable ->
+                                                    }.onFailure { _ ->
                                                         setUiText(uiText + it.text)
                                                     }
                                                     setInput((input ?: "") + it.text)
@@ -191,7 +192,7 @@ class MainActivity : ComponentActivity() {
                                                             setUiText(
                                                                 uiText.toInt().toString() + it.text
                                                             )
-                                                        }.onFailure { throwable ->
+                                                        }.onFailure { _ ->
                                                             setUiText(uiText + it.text)
                                                         }
                                                         if (input != null) {
@@ -230,7 +231,7 @@ class MainActivity : ComponentActivity() {
                                 .clip(
                                     RoundedCornerShape(8.dp)
                                 )
-                                .background(secondary_color)
+                                .background(secondaryColor)
                                 .padding(horizontal = 15.dp, vertical = 8.dp)
                         ) {
                             Icon(
@@ -241,7 +242,9 @@ class MainActivity : ComponentActivity() {
                                     },
                                 painter = painterResource(id = R.drawable.ic_darkmode),
                                 contentDescription = null,
-                                tint = if (darkModeEnabled) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else Color.Gray
+                                tint = if (darkModeEnabled) MaterialTheme.colorScheme.primary.copy(
+                                    alpha = 0.5f
+                                ) else Color.Gray
                             )
 
                             Icon(
@@ -252,7 +255,9 @@ class MainActivity : ComponentActivity() {
                                     },
                                 painter = painterResource(id = R.drawable.ic_lightmode),
                                 contentDescription = null,
-                                tint = if (!darkModeEnabled) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else Color.Gray
+                                tint = if (!darkModeEnabled) MaterialTheme.colorScheme.primary.copy(
+                                    alpha = 0.5f
+                                ) else Color.Gray
                             )
                         }
                     }
@@ -265,14 +270,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CalcButton(button: CalculatorButton, textColor: Color, onClick: () -> Unit) {
     val darkModeEnabled by LocalTheme.current.darkMode.collectAsState()
-    val primary_color = if(darkModeEnabled) DarkMode_Primary else LightMode_Primary
-    val green = if(darkModeEnabled) DarkMode_Green else LightMode_Green
-    val red   = if(darkModeEnabled) DarkMode_Red else LightMode_Red
+    val primaryColor = if (darkModeEnabled) DarkMode_Primary else LightMode_Primary
+    val green = if (darkModeEnabled) DarkMode_Green else LightMode_Green
+    val red = if (darkModeEnabled) DarkMode_Red else LightMode_Red
 
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(primary_color)
+            .background(primaryColor)
             .fillMaxHeight()
             .aspectRatio(1f)
             .clickable {
@@ -281,12 +286,11 @@ fun CalcButton(button: CalculatorButton, textColor: Color, onClick: () -> Unit) 
         contentAlignment = Alignment.Center
     ) {
         val contentColor =
-            if (button.type == CalculatorButtonType.Normal)
-                textColor
-            else if (button.type == CalculatorButtonType.Action)
-                red
-            else
-                green
+            when (button.type) {
+                CalculatorButtonType.Normal -> textColor
+                CalculatorButtonType.Action -> red
+                else -> green
+            }
         if (button.text != null) {
             Text(
                 button.text,
