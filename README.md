@@ -49,7 +49,7 @@ To explore and contribute to the R37URN0 Calculator, follow these steps:
 7. Review and update typography settings in `ui/theme/Type.kt` for optimal readability.
 8. Run the application on an emulator or physical device to test and observe the changes.
 
-## License
+
 
 The R37URN0 Calculator is released under the [MIT License](LICENSE), permitting use in personal and commercial projects.
 
